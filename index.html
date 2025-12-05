@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sommelier Digital</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=5">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons (jsDelivr to avoid tracking prevention issues) -->
@@ -131,9 +131,11 @@
 
             <div class="home-content-scroll">
                 <!-- Hero Section -->
-                <div class="hero-card">
+                <div class="hero-card" onclick="navigateTo('screen-recommendations')" style="cursor: pointer;">
                     <div class="hero-text">
                         <h2>Disfruta la naturaleza,<br>la gente y el <span>vino</span></h2>
+                        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.9;">Ver recomendaciones del Sommelier
+                            <i class="fa-solid fa-arrow-right"></i></p>
                     </div>
                 </div>
 
@@ -332,6 +334,63 @@
             </div>
         </section>
 
+        <!-- RECOMMENDATIONS SCREEN -->
+        <section id="screen-recommendations" class="screen hidden">
+            <div class="recommendations-content">
+                <div class="sommelier-hero">
+                    <div class="sommelier-illustration">
+                        <div class="illustration-circle">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <i class="fa-solid fa-wine-glass"></i>
+                        </div>
+                    </div>
+                    <h2>Hola, Victor Morales</h2>
+                    <p class="intro-text">Noté que fuiste a tours con degustaciones de vinos dulces. ¡Veo que eso es lo
+                        tuyo! 🍇✨</p>
+                </div>
+
+                <div class="recommendation-card card-beige">
+                    <div class="card-header">
+                        <i class="fa-solid fa-wine-glass-empty"></i>
+                        <h3>Cómo reconocer un vino dulce?</h3>
+                    </div>
+                    <ul>
+                        <li>Los vinos dulces suelen identificarse por etiquetas como "Late Harvest", "Dulce", "Moscatel"
+                            o "Cosecha Tardía".</li>
+                        <li>Normalmente se elaboran con uvas sobremaduras que concentran azúcar natural.</li>
+                        <li>Suelen presentar aromas florales y notas de miel o fruta madura.</li>
+                    </ul>
+                </div>
+
+                <div class="recommendation-card card-green">
+                    <div class="card-header">
+                        <i class="fa-solid fa-utensils"></i>
+                        <h3>Con qué combinan los vinos dulces</h3>
+                    </div>
+                    <ul>
+                        <li>Ideales con postres, cheesecake, chocolate blanco y tartas frutales.</li>
+                        <li>Funcionan muy bien en celebraciones, atardeceres o finales de comida.</li>
+                        <li>También se disfrutan solos, como vino de acompañamiento.</li>
+                    </ul>
+                </div>
+
+                <div class="recommendation-card card-pink">
+                    <div class="card-header">
+                        <i class="fa-solid fa-wine-bottle"></i>
+                        <h3>Los vinos dulces más populares</h3>
+                    </div>
+                    <ul>
+                        <li>Se espera que las uvas maduren más de lo normal.</li>
+                        <li>La fruta concentra azúcares naturalmente.</li>
+                        <li>Chile produce vinos dulces reconocidos mundialmente.</li>
+                    </ul>
+                </div>
+
+                <!-- Spacer for bottom nav -->
+                <div style="height: 80px;"></div>
+            </div>
+        </section>
+
         <!-- RESERVATION MODAL -->
         <div id="modal-reservation" class="modal hidden">
             <div class="modal-content">
@@ -345,17 +404,25 @@
         </div>
 
         <!-- GLOBAL BOTTOM NAV -->
-        <nav id="global-bottom-nav" class="bottom-nav hidden">
-            <button class="nav-item active" data-target="screen-home" onclick="navigateTo('screen-home')"><i
-                    class="fa-solid fa-house"></i></button>
-            <button class="nav-item" data-target="screen-chat" onclick="navigateTo('screen-chat')"><i
-                    class="fa-solid fa-comment-dots"></i></button>
-            <button class="nav-item" data-target="screen-favorites" onclick="navigateTo('screen-favorites')"><i
-                    class="fa-solid fa-heart"></i></button>
-            <button class="nav-item" data-target="screen-saved" onclick="navigateTo('screen-saved')"><i
-                    class="fa-solid fa-bookmark"></i></button>
-            <button class="nav-item" data-target="screen-profile" onclick="navigateTo('screen-profile')"><i
-                    class="fa-solid fa-user"></i></button>
+        <nav id="global-bottom-nav" class="bottom-nav">
+            <button class="nav-chat-pill" onclick="navigateTo('screen-chat')">
+                <i class="fa-solid fa-comments"></i> Chat
+            </button>
+
+            <div class="nav-icons-group">
+                <button class="nav-item" data-target="screen-home" onclick="navigateTo('screen-home')">
+                    <i class="fa-solid fa-house"></i>
+                </button>
+                <button class="nav-item" data-target="screen-favorites" onclick="navigateTo('screen-favorites')">
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+                <button class="nav-item" data-target="screen-saved" onclick="navigateTo('screen-saved')">
+                    <i class="fa-solid fa-bookmark"></i>
+                </button>
+                <button class="nav-item" data-target="screen-profile" onclick="navigateTo('screen-profile')">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+            </div>
         </nav>
 
     </div>

@@ -2,336 +2,365 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sommelier Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (jsDelivr to avoid tracking prevention issues) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 
-    <!-- LOGIN SCREEN -->
-    <section id="screen-login" class="screen active">
-        <div class="login-header">
-            <div class="language-selector" id="language-selector">
-                <i class="fa-solid fa-globe"></i> <span id="selected-language">Español</span> <i
-                    class="fa-solid fa-chevron-down"></i>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2E3A59">
+    <link rel="apple-touch-icon" href="icon-192.png">
 
-                <div class="language-dropdown hidden" id="language-dropdown">
-                    <div class="lang-option" onclick="selectLanguage('Español', '🇪🇸')">
-                        <span class="flag">🇪🇸</span> Español
-                    </div>
-                    <div class="lang-option" onclick="selectLanguage('English', '🇺🇸')">
-                        <span class="flag">🇺🇸</span> English
-                    </div>
-                    <div class="lang-option" onclick="selectLanguage('Português', '🇧🇷')">
-                        <span class="flag">🇧🇷</span> Português
-                    </div>
-                    <div class="lang-option" onclick="selectLanguage('Français', '🇫🇷')">
-                        <span class="flag">🇫🇷</span> Français
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./service-worker.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- LOGIN SCREEN -->
+        <section id="screen-login" class="screen active">
+            <div class="login-header">
+                <div class="language-selector" id="language-selector">
+                    <i class="fa-solid fa-globe"></i> <span id="selected-language">Español</span> <i
+                        class="fa-solid fa-chevron-down"></i>
+
+                    <div class="language-dropdown hidden" id="language-dropdown">
+                        <div class="lang-option" onclick="selectLanguage('Español', '🇪🇸')">
+                            <span class="flag">🇪🇸</span> Español
+                        </div>
+                        <div class="lang-option" onclick="selectLanguage('English', '🇺🇸')">
+                            <span class="flag">🇺🇸</span> English
+                        </div>
+                        <div class="lang-option" onclick="selectLanguage('Português', '🇧🇷')">
+                            <span class="flag">🇧🇷</span> Português
+                        </div>
+                        <div class="lang-option" onclick="selectLanguage('Français', '🇫🇷')">
+                            <span class="flag">🇫🇷</span> Français
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="login-content">
-            <div class="logo-container">
-                <!-- Placeholder for the illustration -->
-                <div class="illustration-placeholder">
-                    <i class="fa-solid fa-user-tie" style="font-size: 4rem; color: #333;"></i>
-                    <i class="fa-solid fa-wine-glass" style="font-size: 2rem; color: #800020; margin-left: -10px;"></i>
+            <div class="login-content">
+                <div class="logo-container">
+                    <!-- Placeholder for the illustration -->
+                    <div class="illustration-placeholder">
+                        <i class="fa-solid fa-user-tie" style="font-size: 4rem; color: #333;"></i>
+                        <i class="fa-solid fa-wine-glass"
+                            style="font-size: 2rem; color: #800020; margin-left: -10px;"></i>
+                    </div>
+                    <h1>Sommelier<br>digital</h1>
                 </div>
-                <h1>Sommelier<br>digital</h1>
+
+                <div class="login-form">
+                    <h2>Iniciar sesión</h2>
+                    <p>Continuar con el correo</p>
+
+                    <button class="btn-primary" id="btn-login-email">
+                        <i class="fa-solid fa-envelope"></i> Continuar con el correo
+                    </button>
+
+                    <button class="btn-outline" id="btn-guest">
+                        Seguir como invitado
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGIN FORM SCREEN -->
+        <section id="screen-login-form" class="screen hidden">
+            <div class="screen-header-simple">
+                <button class="btn-back" onclick="navigateTo('screen-login')"><i
+                        class="fa-solid fa-arrow-left"></i></button>
+            </div>
+            <div class="login-form-content">
+                <div class="yellow-blob"></div>
+                <h1>Iniciar<br>sesión</h1>
+
+                <form onsubmit="event.preventDefault(); navigateTo('screen-home');">
+                    <div class="input-group">
+                        <label>Correo</label>
+                        <input type="email" placeholder="ejemplo@ejemplo.com" value="ejemplo@ejemplo.com">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Contraseña</label>
+                        <div class="password-wrapper">
+                            <input type="password" value="******">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary-solid">Iniciar sesión</button>
+
+                    <p class="register-link">¿No tienes cuenta? <a href="#">Regístrate aquí.</a></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- HOME SCREEN -->
+        <section id="screen-home" class="screen hidden">
+            <div class="home-header">
+                <div class="user-greeting">
+                    <div class="avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="greeting-text">
+                        <p>Hola, Victor Morales</p>
+                    </div>
+                </div>
+                <div class="header-icons">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </div>
             </div>
 
-            <div class="login-form">
-                <h2>Iniciar sesión</h2>
-                <p>Continuar con el correo</p>
+            <div class="home-content-scroll">
+                <!-- Hero Section -->
+                <div class="hero-card">
+                    <div class="hero-text">
+                        <h2>Disfruta la naturaleza,<br>la gente y el <span>vino</span></h2>
+                    </div>
+                </div>
 
-                <button class="btn-primary" id="btn-login-email">
-                    <i class="fa-solid fa-envelope"></i> Continuar con el correo
+                <!-- Search -->
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" placeholder="¿Dónde te gustaría reservar?">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+
+                <!-- Categories -->
+                <div class="categories">
+                    <button class="cat-btn active" data-filter="all">Todo</button>
+                    <button class="cat-btn" data-filter="wine">Vinos</button>
+                    <button class="cat-btn" data-filter="hiking">Paseos</button>
+                    <button class="cat-btn" data-filter="food">Comida</button>
+                    <button class="cat-btn" data-filter="stay">Alojamiento</button>
+                    <button class="cat-btn" data-filter="events">Eventos</button>
+                    <button class="cat-btn" data-filter="premium">Premium</button>
+                </div>
+
+                <!-- Cards Grid (Dynamic Content) -->
+                <div class="cards-grid" id="home-cards-grid">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAT SCREEN -->
+        <section id="screen-chat" class="screen hidden">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        alt="Sommelier" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="chat-title">
+                    <h3>Jean-Pierre</h3>
+                    <p style="font-size: 0.75rem; opacity: 0.9; font-weight: 300;">Sommelier Senior</p>
+                </div>
+                <div class="header-icons" style="margin-left: auto; color: white;">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+            </div>
+
+            <div class="chat-messages">
+                <div class="message received">
+                    <p>¡Bonjour! Soy Jean-Pierre, su Sommelier personal. ¿En qué puedo asistirle hoy para mejorar su
+                        experiencia vitivinícola?</p>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <button class="chat-action-btn"><i class="fa-solid fa-plus"></i></button>
+                <input type="text" id="chat-input" placeholder="Escribe tu consulta...">
+                <button class="chat-mic-btn" id="btn-send-chat"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </section>
+
+        <!-- FAVORITES SCREEN -->
+        <section id="screen-favorites" class="screen hidden">
+            <div class="screen-header-simple">
+                <h2>Favoritos</h2>
+            </div>
+            <div class="home-content-scroll">
+                <div class="cards-grid" id="favorites-cards-grid">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SAVED/BOOKINGS SCREEN -->
+        <section id="screen-saved" class="screen hidden">
+            <div class="screen-header-simple">
+                <h2>Mis Reservas</h2>
+            </div>
+            <div class="home-content-scroll">
+                <div class="bookings-list" id="bookings-list">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SCREEN -->
+        <section id="screen-profile" class="screen hidden">
+            <div class="profile-header">
+                <div class="profile-avatar-large">
+                    <i class="fa-solid fa-user"></i>
+                    <button class="edit-avatar-btn"><i class="fa-solid fa-camera"></i></button>
+                </div>
+                <h2>Victor Morales</h2>
+                <p>victor.morales@email.com</p>
+            </div>
+
+            <div class="profile-menu">
+                <button class="menu-item">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <span>Editar Perfil</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Métodos de Pago</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notificaciones</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-language"></i>
+                    <span>Idioma</span>
+                    <span class="value">Español</span>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Ayuda y Soporte</span>
+                    <i class="fa-solid fa-chevron-right"></i>
                 </button>
 
-                <button class="btn-outline" id="btn-guest">
-                    Seguir como invitado
+                <button class="menu-item logout" onclick="navigateTo('screen-login')">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar Sesión</span>
                 </button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- LOGIN FORM SCREEN -->
-    <section id="screen-login-form" class="screen hidden">
-        <div class="screen-header-simple">
-            <button class="btn-back" onclick="navigateTo('screen-login')"><i
-                    class="fa-solid fa-arrow-left"></i></button>
-        </div>
-        <div class="login-form-content">
-            <div class="yellow-blob"></div>
-            <h1>Iniciar<br>sesión</h1>
+        <!-- DETAIL SCREEN -->
+        <section id="screen-detail" class="screen hidden">
+            <div class="detail-header">
+                <button class="btn-back-detail" onclick="navigateTo('screen-home')"><i
+                        class="fa-solid fa-arrow-left"></i></button>
+                <div class="detail-image"></div>
+            </div>
 
-            <form onsubmit="event.preventDefault(); navigateTo('screen-home');">
-                <div class="input-group">
-                    <label>Correo</label>
-                    <input type="email" placeholder="ejemplo@ejemplo.com" value="ejemplo@ejemplo.com">
-                </div>
+            <div class="detail-content">
+                <div class="detail-card">
+                    <h2>Descubre esta experiencia enoturística única</h2>
 
-                <div class="input-group">
-                    <label>Contraseña</label>
-                    <div class="password-wrapper">
-                        <input type="password" value="******">
-                        <i class="fa-solid fa-lock"></i>
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <strong>¿Dónde?</strong>
+                            <p>H-71, Pelequen, O'Higgins</p>
+                        </div>
+                        <i class="fa-solid fa-volume-high speaker-icon"></i>
                     </div>
-                </div>
 
-                <button type="submit" class="btn-primary-solid">Iniciar sesión</button>
-
-                <p class="register-link">¿No tienes cuenta? <a href="#">Regístrate aquí.</a></p>
-            </form>
-        </div>
-    </section>
-
-    <!-- HOME SCREEN -->
-    <section id="screen-home" class="screen hidden">
-        <div class="home-header">
-            <div class="user-greeting">
-                <div class="avatar">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="greeting-text">
-                    <p>Hola, Victor Morales</p>
-                </div>
-            </div>
-            <div class="header-icons">
-                <i class="fa-solid fa-bell"></i>
-                <span class="notification-dot"></span>
-            </div>
-        </div>
-
-        <div class="home-content-scroll">
-            <!-- Hero Section -->
-            <div class="hero-card">
-                <div class="hero-text">
-                    <h2>Disfruta la naturaleza,<br>la gente y el <span>vino</span></h2>
-                </div>
-            </div>
-
-            <!-- Search -->
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search-input" placeholder="¿Dónde te gustaría reservar?">
-                <i class="fa-solid fa-sliders"></i>
-            </div>
-
-            <!-- Categories -->
-            <div class="categories">
-                <button class="cat-btn active" data-filter="all">Todo</button>
-                <button class="cat-btn" data-filter="wine">Vinos</button>
-                <button class="cat-btn" data-filter="hiking">Paseos</button>
-                <button class="cat-btn" data-filter="food">Comida</button>
-                <button class="cat-btn" data-filter="stay">Alojamiento</button>
-                <button class="cat-btn" data-filter="events">Eventos</button>
-                <button class="cat-btn" data-filter="premium">Premium</button>
-            </div>
-
-            <!-- Cards Grid (Dynamic Content) -->
-            <div class="cards-grid" id="home-cards-grid">
-                <!-- Content injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- CHAT SCREEN -->
-    <section id="screen-chat" class="screen hidden">
-        <div class="chat-header">
-            <div class="chat-avatar">
-                <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-                    alt="Sommelier" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-            </div>
-            <div class="chat-title">
-                <h3>Jean-Pierre</h3>
-                <p style="font-size: 0.75rem; opacity: 0.9; font-weight: 300;">Sommelier Senior</p>
-            </div>
-            <div class="header-icons" style="margin-left: auto; color: white;">
-                <i class="fa-solid fa-phone"></i>
-            </div>
-        </div>
-
-        <div class="chat-messages">
-            <div class="message received">
-                <p>¡Bonjour! Soy Jean-Pierre, su Sommelier personal. ¿En qué puedo asistirle hoy para mejorar su
-                    experiencia vitivinícola?</p>
-            </div>
-        </div>
-
-        <div class="chat-input-area">
-            <button class="chat-action-btn"><i class="fa-solid fa-plus"></i></button>
-            <input type="text" id="chat-input" placeholder="Escribe tu consulta...">
-            <button class="chat-mic-btn" id="btn-send-chat"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </section>
-
-    <!-- FAVORITES SCREEN -->
-    <section id="screen-favorites" class="screen hidden">
-        <div class="screen-header-simple">
-            <h2>Favoritos</h2>
-        </div>
-        <div class="home-content-scroll">
-            <div class="cards-grid" id="favorites-cards-grid">
-                <!-- Content injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- SAVED/BOOKINGS SCREEN -->
-    <section id="screen-saved" class="screen hidden">
-        <div class="screen-header-simple">
-            <h2>Mis Reservas</h2>
-        </div>
-        <div class="home-content-scroll">
-            <div class="bookings-list" id="bookings-list">
-                <!-- Content injected by JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- PROFILE SCREEN -->
-    <section id="screen-profile" class="screen hidden">
-        <div class="profile-header">
-            <div class="profile-avatar-large">
-                <i class="fa-solid fa-user"></i>
-                <button class="edit-avatar-btn"><i class="fa-solid fa-camera"></i></button>
-            </div>
-            <h2>Victor Morales</h2>
-            <p>victor.morales@email.com</p>
-        </div>
-
-        <div class="profile-menu">
-            <button class="menu-item">
-                <i class="fa-solid fa-user-pen"></i>
-                <span>Editar Perfil</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-            <button class="menu-item">
-                <i class="fa-solid fa-credit-card"></i>
-                <span>Métodos de Pago</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-            <button class="menu-item">
-                <i class="fa-solid fa-bell"></i>
-                <span>Notificaciones</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-            <button class="menu-item">
-                <i class="fa-solid fa-language"></i>
-                <span>Idioma</span>
-                <span class="value">Español</span>
-            </button>
-            <button class="menu-item">
-                <i class="fa-solid fa-circle-question"></i>
-                <span>Ayuda y Soporte</span>
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
-            <button class="menu-item logout" onclick="navigateTo('screen-login')">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span>Cerrar Sesión</span>
-            </button>
-        </div>
-    </section>
-
-    <!-- DETAIL SCREEN -->
-    <section id="screen-detail" class="screen hidden">
-        <div class="detail-header">
-            <button class="btn-back-detail" onclick="navigateTo('screen-home')"><i
-                    class="fa-solid fa-arrow-left"></i></button>
-            <div class="detail-image"></div>
-        </div>
-
-        <div class="detail-content">
-            <div class="detail-card">
-                <h2>Descubre esta experiencia enoturística única</h2>
-
-                <div class="detail-info-row">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <div>
-                        <strong>¿Dónde?</strong>
-                        <p>H-71, Pelequen, O'Higgins</p>
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <div>
+                            <strong>Precio por persona</strong>
+                            <p>$35.000</p>
+                        </div>
                     </div>
-                    <i class="fa-solid fa-volume-high speaker-icon"></i>
-                </div>
 
-                <div class="detail-info-row">
-                    <i class="fa-solid fa-dollar-sign"></i>
-                    <div>
-                        <strong>Precio por persona</strong>
-                        <p>$35.000</p>
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-user"></i>
+                        <div>
+                            <strong>Cupos</strong>
+                            <p>Hasta 30 personas</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="detail-info-row">
-                    <i class="fa-solid fa-user"></i>
-                    <div>
-                        <strong>Cupos</strong>
-                        <p>Hasta 30 personas</p>
+                    <div class="detail-info-row">
+                        <i class="fa-regular fa-calendar"></i>
+                        <div>
+                            <strong>Horario</strong>
+                            <p>Martes a Sábado<br>10:00 hrs a 18:00 hrs</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="detail-info-row">
-                    <i class="fa-regular fa-calendar"></i>
-                    <div>
-                        <strong>Horario</strong>
-                        <p>Martes a Sábado<br>10:00 hrs a 18:00 hrs</p>
+                    <div class="detail-info-row">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <strong>Duración</strong>
+                            <p>1 hora y 30 minutos</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="detail-info-row">
-                    <i class="fa-regular fa-clock"></i>
-                    <div>
-                        <strong>Duración</strong>
-                        <p>1 hora y 30 minutos</p>
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-globe"></i>
+                        <div>
+                            <p>vallesecreto.cl/</p>
+                        </div>
                     </div>
+
+                    <button class="btn-reserve" id="btn-reserve">Reservar</button>
                 </div>
 
-                <div class="detail-info-row">
-                    <i class="fa-solid fa-globe"></i>
-                    <div>
-                        <p>vallesecreto.cl/</p>
-                    </div>
+                <div class="detail-description">
+                    <h3>¿Qué experimentarás en esta experiencia?</h3>
+                    <p>Conoce los viñedos, bodega, capilla colonial y degustación de 4 vinos entre las líneas First
+                        Edition y Private (2 vinos de cada línea), acompañado de una tabla de charcutería y quesos.</p>
                 </div>
-
-                <button class="btn-reserve" id="btn-reserve">Reservar</button>
             </div>
+        </section>
 
-            <div class="detail-description">
-                <h3>¿Qué experimentarás en esta experiencia?</h3>
-                <p>Conoce los viñedos, bodega, capilla colonial y degustación de 4 vinos entre las líneas First
-                    Edition y Private (2 vinos de cada línea), acompañado de una tabla de charcutería y quesos.</p>
+        <!-- RESERVATION MODAL -->
+        <div id="modal-reservation" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h2>¡Reserva Exitosa!</h2>
+                <p>Tu experiencia ha sido reservada correctamente. Te hemos enviado un correo con los detalles.</p>
+                <button class="btn-primary-solid" onclick="finishReservation()">Entendido</button>
             </div>
         </div>
-    </section>
 
-    <!-- RESERVATION MODAL -->
-    <div id="modal-reservation" class="modal hidden">
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            <h2>¡Reserva Exitosa!</h2>
-            <p>Tu experiencia ha sido reservada correctamente. Te hemos enviado un correo con los detalles.</p>
-            <button class="btn-primary-solid" onclick="finishReservation()">Entendido</button>
-        </div>
-    </div>
-
-    <!-- GLOBAL BOTTOM NAV -->
-    <nav id="global-bottom-nav" class="bottom-nav hidden">
-        <button class="nav-item active" data-target="screen-home" onclick="navigateTo('screen-home')"><i
-                class="fa-solid fa-house"></i></button>
-        <button class="nav-item" data-target="screen-chat" onclick="navigateTo('screen-chat')"><i
-                class="fa-solid fa-comment-dots"></i></button>
-        <button class="nav-item" data-target="screen-favorites" onclick="navigateTo('screen-favorites')"><i
-                class="fa-solid fa-heart"></i></button>
-        <button class="nav-item" data-target="screen-saved" onclick="navigateTo('screen-saved')"><i
-                class="fa-solid fa-bookmark"></i></button>
-        <button class="nav-item" data-target="screen-profile" onclick="navigateTo('screen-profile')"><i
-                class="fa-solid fa-user"></i></button>
-    </nav>
+        <!-- GLOBAL BOTTOM NAV -->
+        <nav id="global-bottom-nav" class="bottom-nav hidden">
+            <button class="nav-item active" data-target="screen-home" onclick="navigateTo('screen-home')"><i
+                    class="fa-solid fa-house"></i></button>
+            <button class="nav-item" data-target="screen-chat" onclick="navigateTo('screen-chat')"><i
+                    class="fa-solid fa-comment-dots"></i></button>
+            <button class="nav-item" data-target="screen-favorites" onclick="navigateTo('screen-favorites')"><i
+                    class="fa-solid fa-heart"></i></button>
+            <button class="nav-item" data-target="screen-saved" onclick="navigateTo('screen-saved')"><i
+                    class="fa-solid fa-bookmark"></i></button>
+            <button class="nav-item" data-target="screen-profile" onclick="navigateTo('screen-profile')"><i
+                    class="fa-solid fa-user"></i></button>
+        </nav>
 
     </div>
 
     <script src="app.js"></script>
-    </body>
+</body>
 
 </html>

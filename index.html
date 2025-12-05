@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sommelier Digital</title>
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons (jsDelivr to avoid tracking prevention issues) -->
@@ -135,7 +135,8 @@
                     <div class="hero-text">
                         <h2>Disfruta la naturaleza,<br>la gente y el <span>vino</span></h2>
                         <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.9;">Ver recomendaciones del Sommelier
-                            <i class="fa-solid fa-arrow-right"></i></p>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </p>
                     </div>
                 </div>
 
@@ -386,6 +387,201 @@
                     </ul>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- FAVORITES SCREEN -->
+        <section id="screen-favorites" class="screen hidden">
+            <div class="screen-header-simple">
+                <h2>Favoritos</h2>
+            </div>
+            <div class="home-content-scroll">
+                <div class="cards-grid" id="favorites-cards-grid">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SAVED/BOOKINGS SCREEN -->
+        <section id="screen-saved" class="screen hidden">
+            <div class="screen-header-simple">
+                <h2>Mis Reservas</h2>
+            </div>
+            <div class="home-content-scroll">
+                <div class="bookings-list" id="bookings-list">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SCREEN -->
+        <section id="screen-profile" class="screen hidden">
+            <div class="profile-header">
+                <div class="profile-avatar-large">
+                    <i class="fa-solid fa-user"></i>
+                    <button class="edit-avatar-btn"><i class="fa-solid fa-camera"></i></button>
+                </div>
+                <h2>Victor Morales</h2>
+                <p>victor.morales@email.com</p>
+            </div>
+
+            <div class="profile-menu">
+                <button class="menu-item">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <span>Editar Perfil</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Métodos de Pago</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notificaciones</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-language"></i>
+                    <span>Idioma</span>
+                    <span class="value">Español</span>
+                </button>
+                <button class="menu-item">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Ayuda y Soporte</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button class="menu-item logout" onclick="navigateTo('screen-login')">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- DETAIL SCREEN -->
+        <section id="screen-detail" class="screen hidden">
+            <div class="detail-header">
+                <button class="btn-back-detail" onclick="navigateTo('screen-home')"><i
+                        class="fa-solid fa-arrow-left"></i></button>
+                <div class="detail-image"></div>
+            </div>
+
+            <div class="detail-content">
+                <div class="detail-card">
+                    <h2>Descubre esta experiencia enoturística única</h2>
+
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <strong>¿Dónde?</strong>
+                            <p>H-71, Pelequen, O'Higgins</p>
+                        </div>
+                        <i class="fa-solid fa-volume-high speaker-icon"></i>
+                    </div>
+
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <div>
+                            <strong>Precio por persona</strong>
+                            <p>$35.000</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-user"></i>
+                        <div>
+                            <strong>Cupos</strong>
+                            <p>Hasta 30 personas</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-info-row">
+                        <i class="fa-regular fa-calendar"></i>
+                        <div>
+                            <strong>Horario</strong>
+                            <p>Martes a Sábado<br>10:00 hrs a 18:00 hrs</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-info-row">
+                        <i class="fa-regular fa-clock"></i>
+                        <div>
+                            <strong>Duración</strong>
+                            <p>1 hora y 30 minutos</p>
+                        </div>
+                    </div>
+
+                    <div class="detail-info-row">
+                        <i class="fa-solid fa-globe"></i>
+                        <div>
+                            <p>vallesecreto.cl/</p>
+                        </div>
+                    </div>
+
+                    <button class="btn-reserve" id="btn-reserve">Reservar</button>
+                </div>
+
+                <div class="detail-description">
+                    <h3>¿Qué experimentarás en esta experiencia?</h3>
+                    <p>Conoce los viñedos, bodega, capilla colonial y degustación de 4 vinos entre las líneas First
+                        Edition y Private (2 vinos de cada línea), acompañado de una tabla de charcutería y quesos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECOMMENDATIONS SCREEN -->
+        <section id="screen-recommendations" class="screen hidden">
+            <div class="recommendations-content">
+                <div class="sommelier-hero">
+                    <div class="sommelier-illustration">
+                        <div class="illustration-circle">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <i class="fa-solid fa-wine-glass"></i>
+                        </div>
+                    </div>
+                    <h2>Hola, Victor Morales</h2>
+                    <p class="intro-text">Noté que fuiste a tours con degustaciones de vinos dulces. ¡Veo que eso es lo
+                        tuyo! 🍇✨</p>
+                </div>
+
+                <div class="recommendation-card card-beige">
+                    <div class="card-header">
+                        <i class="fa-solid fa-wine-glass-empty"></i>
+                        <h3>Cómo reconocer un vino dulce?</h3>
+                    </div>
+                    <ul>
+                        <li>Los vinos dulces suelen identificarse por etiquetas como "Late Harvest", "Dulce", "Moscatel"
+                            o "Cosecha Tardía".</li>
+                        <li>Normalmente se elaboran con uvas sobremaduras que concentran azúcar natural.</li>
+                        <li>Suelen presentar aromas florales y notas de miel o fruta madura.</li>
+                    </ul>
+                </div>
+
+                <div class="recommendation-card card-green">
+                    <div class="card-header">
+                        <i class="fa-solid fa-utensils"></i>
+                        <h3>Con qué combinan los vinos dulces</h3>
+                    </div>
+                    <ul>
+                        <li>Ideales con postres, cheesecake, chocolate blanco y tartas frutales.</li>
+                        <li>Funcionan muy bien en celebraciones, atardeceres o finales de comida.</li>
+                        <li>También se disfrutan solos, como vino de acompañamiento.</li>
+                    </ul>
+                </div>
+
+                <div class="recommendation-card card-pink">
+                    <div class="card-header">
+                        <i class="fa-solid fa-wine-bottle"></i>
+                        <h3>Los vinos dulces más populares</h3>
+                    </div>
+                    <ul>
+                        <li>Se espera que las uvas maduren más de lo normal.</li>
+                        <li>La fruta concentra azúcares naturalmente.</li>
+                        <li>Chile produce vinos dulces reconocidos mundialmente.</li>
+                    </ul>
+                </div>
+
                 <!-- Spacer for bottom nav -->
                 <div style="height: 80px;"></div>
             </div>
@@ -404,25 +600,32 @@
         </div>
 
         <!-- GLOBAL BOTTOM NAV -->
-        <nav id="global-bottom-nav" class="bottom-nav">
-            <button class="nav-chat-pill" onclick="navigateTo('screen-chat')">
-                <i class="fa-solid fa-comments"></i> Chat
+        <nav id="global-bottom-nav" class="bottom-nav hidden">
+            <button class="nav-item active" data-target="screen-home" onclick="navigateTo('screen-home')">
+                <i class="fa-solid fa-house"></i>
+                <span class="nav-label">Inicio</span>
             </button>
-
-            <div class="nav-icons-group">
-                <button class="nav-item" data-target="screen-home" onclick="navigateTo('screen-home')">
-                    <i class="fa-solid fa-house"></i>
-                </button>
-                <button class="nav-item" data-target="screen-favorites" onclick="navigateTo('screen-favorites')">
-                    <i class="fa-solid fa-heart"></i>
-                </button>
-                <button class="nav-item" data-target="screen-saved" onclick="navigateTo('screen-saved')">
-                    <i class="fa-solid fa-bookmark"></i>
-                </button>
-                <button class="nav-item" data-target="screen-profile" onclick="navigateTo('screen-profile')">
-                    <i class="fa-solid fa-user"></i>
-                </button>
-            </div>
+            <button class="nav-item" data-target="screen-recommendations"
+                onclick="navigateTo('screen-recommendations')">
+                <i class="fa-solid fa-wine-glass"></i>
+                <span class="nav-label">Tips</span>
+            </button>
+            <button class="nav-item" data-target="screen-chat" onclick="navigateTo('screen-chat')">
+                <i class="fa-solid fa-comments"></i>
+                <span class="nav-label">Chat</span>
+            </button>
+            <button class="nav-item" data-target="screen-saved" onclick="navigateTo('screen-saved')">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span class="nav-label">Reservas</span>
+            </button>
+            <button class="nav-item" data-target="screen-favorites" onclick="navigateTo('screen-favorites')">
+                <i class="fa-solid fa-heart"></i>
+                <span class="nav-label">Favoritos</span>
+            </button>
+            <button class="nav-item" data-target="screen-profile" onclick="navigateTo('screen-profile')">
+                <i class="fa-solid fa-user"></i>
+                <span class="nav-label">Perfil</span>
+            </button>
         </nav>
 
     </div>
